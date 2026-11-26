@@ -1,0 +1,327 @@
+@import "tailwindcss";
+
+/* =====================================================================
+   هوية الموقع — غيّر الألوان والخطوط من هنا فقط
+   ===================================================================== */
+@theme {
+  /* الخطوط */
+  --font-sans: "Tajawal", "Segoe UI", Tahoma, system-ui, sans-serif;
+  --font-display: "El Messiri", "Tajawal", "Segoe UI", Tahoma, serif;
+  --font-script: "Aref Ruqaa", "El Messiri", "Tajawal", serif;
+
+  /* بيج */
+  --color-cream-50: #fdfaf4;
+  --color-cream-100: #f8f1e4;
+  --color-cream-200: #efe4cf;
+  --color-cream-300: #e2d2b4;
+
+  /* أخضر زيتوني */
+  --color-olive-950: #1c2212;
+  --color-olive-900: #262e18;
+  --color-olive-800: #333d20;
+  --color-olive-700: #44512a;
+  --color-olive-600: #5a6a38;
+  --color-olive-500: #74854c;
+  --color-olive-200: #c9d1ae;
+
+  /* ذهبي */
+  --color-gold-700: #8a6424;
+  --color-gold-600: #a87b2e;
+  --color-gold-500: #c39a45;
+  --color-gold-400: #d8b66a;
+  --color-gold-300: #e7cf95;
+
+  /* لون النص الأساسي */
+  --color-ink: #23271a;
+
+  --shadow-soft: 0 24px 60px -32px rgb(28 34 18 / 0.45);
+}
+
+/* =====================================================================
+   القواعد العامة
+   ===================================================================== */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--color-cream-50);
+    color: var(--color-ink);
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: var(--color-gold-400);
+    color: var(--color-olive-950);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold-500);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  button {
+    cursor: pointer;
+  }
+}
+
+/* =====================================================================
+   مكوّنات قابلة لإعادة الاستعمال
+   ===================================================================== */
+@layer components {
+  /* حاوية المحتوى */
+  .wrap {
+    width: 100%;
+    max-width: 76rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 640px) {
+    .wrap {
+      padding-inline: 2rem;
+    }
+  }
+
+  /* ---------- الأزرار ---------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    min-height: 3rem;
+    padding: 0.65rem 1.6rem;
+    border-radius: 999px;
+    border: 1.5px solid transparent;
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1.4;
+    white-space: nowrap;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease,
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      color 0.2s ease;
+  }
+  .btn:active {
+    transform: translateY(1px) scale(0.985);
+  }
+
+  .btn-gold {
+    background: linear-gradient(135deg, var(--color-gold-400), var(--color-gold-500));
+    color: var(--color-olive-950);
+    box-shadow: 0 12px 26px -14px rgb(168 123 46 / 0.9);
+  }
+  .btn-gold:hover {
+    background: linear-gradient(135deg, var(--color-gold-300), var(--color-gold-400));
+    transform: translateY(-2px);
+    box-shadow: 0 16px 30px -14px rgb(168 123 46 / 0.95);
+  }
+
+  .btn-olive {
+    background: var(--color-olive-800);
+    color: var(--color-cream-50);
+  }
+  .btn-olive:hover {
+    background: var(--color-olive-700);
+    transform: translateY(-2px);
+  }
+
+  .btn-wa {
+    background: #15803d;
+    color: #fff;
+    box-shadow: 0 12px 26px -16px rgb(21 128 61 / 0.9);
+  }
+  .btn-wa:hover {
+    background: #166534;
+    transform: translateY(-2px);
+  }
+
+  .btn-line-light {
+    border-color: rgb(253 250 244 / 0.55);
+    color: var(--color-cream-50);
+  }
+  .btn-line-light:hover {
+    background: rgb(253 250 244 / 0.12);
+    border-color: var(--color-cream-50);
+  }
+
+  .btn-line-dark {
+    border-color: rgb(51 61 32 / 0.35);
+    color: var(--color-olive-900);
+  }
+  .btn-line-dark:hover {
+    background: var(--color-olive-800);
+    border-color: var(--color-olive-800);
+    color: var(--color-cream-50);
+  }
+
+  /* ---------- حقول النموذج ---------- */
+  .field {
+    width: 100%;
+    min-height: 3.1rem;
+    padding: 0.65rem 1rem;
+    border-radius: 0.85rem;
+    border: 1.5px solid var(--color-cream-300);
+    background: #fff;
+    color: var(--color-ink);
+    font-size: 1rem;
+    line-height: 1.5;
+    transition:
+      border-color 0.15s ease,
+      box-shadow 0.15s ease;
+  }
+  .field::placeholder {
+    color: rgb(35 39 26 / 0.45);
+  }
+  .field:hover {
+    border-color: var(--color-gold-400);
+  }
+  .field:focus {
+    outline: none;
+    border-color: var(--color-gold-600);
+    box-shadow: 0 0 0 4px rgb(195 154 69 / 0.22);
+  }
+  .field[aria-invalid="true"] {
+    border-color: #b3261e;
+  }
+  .field[aria-invalid="true"]:focus {
+    box-shadow: 0 0 0 4px rgb(179 38 30 / 0.16);
+  }
+  select.field {
+    appearance: none;
+    padding-inline-end: 2.75rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238a6424' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: left 1rem center;
+  }
+  textarea.field {
+    min-height: 7rem;
+    resize: vertical;
+  }
+
+  /* ---------- القوس المغربي (إطار الصور) ---------- */
+  .arch {
+    border-radius: 999px 999px 1.25rem 1.25rem;
+  }
+
+  /* ---------- زخرفة الزليج (نجمة ثمانية متكررة) ---------- */
+  .zellige-gold {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cg fill='none' stroke='%23D8B66A' stroke-opacity='.14' stroke-width='1'%3E%3Crect x='22' y='22' width='28' height='28'/%3E%3Crect x='22' y='22' width='28' height='28' transform='rotate(45 36 36)'/%3E%3Cpath d='M0 36h16.2M55.8 36H72M36 0v16.2M36 55.8V72'/%3E%3Crect x='-5' y='-5' width='10' height='10' transform='rotate(45 0 0)'/%3E%3Crect x='67' y='-5' width='10' height='10' transform='rotate(45 72 0)'/%3E%3Crect x='-5' y='67' width='10' height='10' transform='rotate(45 0 72)'/%3E%3Crect x='67' y='67' width='10' height='10' transform='rotate(45 72 72)'/%3E%3C/g%3E%3C/svg%3E");
+  }
+  .zellige-olive {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cg fill='none' stroke='%238A6424' stroke-opacity='.11' stroke-width='1'%3E%3Crect x='22' y='22' width='28' height='28'/%3E%3Crect x='22' y='22' width='28' height='28' transform='rotate(45 36 36)'/%3E%3Cpath d='M0 36h16.2M55.8 36H72M36 0v16.2M36 55.8V72'/%3E%3Crect x='-5' y='-5' width='10' height='10' transform='rotate(45 0 0)'/%3E%3Crect x='67' y='-5' width='10' height='10' transform='rotate(45 72 0)'/%3E%3Crect x='-5' y='67' width='10' height='10' transform='rotate(45 0 72)'/%3E%3Crect x='67' y='67' width='10' height='10' transform='rotate(45 72 72)'/%3E%3C/g%3E%3C/svg%3E");
+  }
+}
+
+/* =====================================================================
+   الحركة
+   ===================================================================== */
+
+/* ظهور العناصر عند التمرير (يتحكم بها المكوّن Reveal) */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* دخول عناصر الواجهة الرئيسية عند فتح الصفحة */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.hero-in {
+  animation: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: var(--d, 0ms);
+}
+
+@keyframes settle {
+  from {
+    transform: scale(1.07);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+.hero-image {
+  animation: settle 1.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.pop-in {
+  animation: pop 0.22s ease-out both;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.fade-in {
+  animation: fade 0.25s ease-out both;
+}
+
+/* احترام إعداد "تقليل الحركة" في جهاز الزائر */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .hero-in,
+  .hero-image,
+  .pop-in,
+  .fade-in {
+    animation: none;
+  }
+  .btn,
+  .btn:hover {
+    transition: none;
+    transform: none;
+  }
+}
